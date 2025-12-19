@@ -1,0 +1,27 @@
+# FreshOps Constants and Magic Numbers
+#
+# This file contains all magic numbers, limits, and configuration constants
+# used throughout the FreshOps library. Values are organized by category
+# and include documentation for each constant.
+
+[caching]
+# Maximum number of items to load when populating a cache from a list API.
+# Used when a collection needs to load all items (e.g., Groups, Roles, Departments).
+# The FreshService API typically has a per-page limit of 100, so this allows
+# for up to 100 pages of results.
+max_cache_load = 10000
+
+[api]
+# Default number of items per page when making list API calls.
+# Most FreshService list endpoints support pagination with a default of 30
+# and a maximum of 100 items per page.
+default_per_page = 100
+
+# Maximum number of items per page supported by the FreshService API.
+max_per_page = 100
+
+[datetime]
+# Number of days to consider "recent" for relative datetime formatting.
+# Dates within this window will be shown as "X days ago" instead of absolute dates.
+recent_days_threshold = 7
+

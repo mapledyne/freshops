@@ -1,0 +1,95 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "freshops"
+dynamic = ["version"]
+description = "FreshService API client library and CLI tool"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "you@example.com"}
+]
+dependencies = [
+    "requests>=2.28.0",
+    "loguru>=0.7.0",
+    "python-dotenv>=1.0.0",
+    "tomli>=2.0.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+cli = [
+    "click>=8.1.0",
+    "rich>=13.0.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+
+[project.scripts]
+freshops = "freshops.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "freshops.__about__.__version__"}
+
+
+[tool.ruff]
+line-length = 100
+indent-width = 4
+extend-exclude = [".scratch"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+docstring-code-format = true
+
+[tool.ruff.lint]
+
+select = [
+  # default
+  "F",      # flake8 error
+  "E",      # pycodestyle error
+  "I",      # isort imports
+  "ANN", # flake8 type annotations
+  "RUF", # ruff-specific rules
+  # extra
+  "A",      # builtin shadowing
+  "B",      # flake8 bugbear
+  "BLE",    # aboid bare excepts
+  "C4",     # simplify comprehensions
+  "DTZ",    # datetime errors
+  "FBT",    # avoid boolean trap
+  "G",      # logging format
+  "N",      # conform to PEP8 naming rules
+  "RET",    # return values
+  "S",      # bandit
+  "TRY",    # exceptions antipatterns
+  "UP",     # upgade syntax
+  "W",      # pycodestyle warning
+  "YTT",    # wrong usage of sys.info
+]
+fixable = ["ALL"]
+
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+pythonVersion = "3.13"
